@@ -15,20 +15,28 @@ describe('TreeSitterDecorationLayer', function () {
       const buffer = new TextBuffer(dedent`
         function foo (a) { return a + 1 }
       `)
+
       const scopeMap = new ScopeMap({
         'program': 'source.js',
         'function': 'meta.function.js',
-        'function > function': 'storage.type.function.js',
+        'function > "function"': 'storage.type.function.js',
         'function > identifier': 'entity.name.function.js',
+        'formal_parameters': 'meta.parameters.js',
+        'formal_parameters > identifier': 'variable.parameter.function.js',
+        '"("': 'punctuation.definition.parameters.begin.bracket.round.js',
+        '")"': 'punctuation.definition.parameters.end.bracket.round.js'
       })
-      const layer = new TreeSitterDecorationLayer({buffer, language: javascriptLanguage, scopeMap})
 
+      console.log(scopeMap);
+
+      const layer = new TreeSitterDecorationLayer({buffer, language: javascriptLanguage, scopeMap})
       const iterator = layer.buildIterator()
+
       iterator.seek({row: 0, column: 0})
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 0})
       assert.deepEqual(iterator.getCloseTags(), [])
       assert.deepEqual(iterator.getOpenTags(), ['source.js', 'meta.function.js', 'storage.type.function.js'])
 
-      return
       iterator.moveToSuccessor()
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function'.length})
       assert.deepEqual(iterator.getCloseTags(), ['storage.type.function.js'])
@@ -53,6 +61,11 @@ describe('TreeSitterDecorationLayer', function () {
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo ('.length})
       assert.deepEqual(iterator.getCloseTags(), ['punctuation.definition.parameters.begin.bracket.round.js'])
       assert.deepEqual(iterator.getOpenTags(), ['variable.parameter.function.js'])
+
+      iterator.moveToSuccessor()
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a'.length})
+      assert.deepEqual(iterator.getCloseTags(), ['variable.parameter.function.js'])
+      assert.deepEqual(iterator.getOpenTags(), ['punctuation.definition.parameters.end.bracket.round.js'])
     })
   })
 })
