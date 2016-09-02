@@ -1,0 +1,2 @@
+'atom-text-editor:not([mini])':
+  'ctrl-alt-s': 'tree-sitter-syntax:toggle'
