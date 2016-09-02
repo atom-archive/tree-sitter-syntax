@@ -28,6 +28,8 @@ describe('TreeSitterDecorationLayer', function () {
         '"{"': 'punctuation.definition.function.body.begin.bracket.curly.js',
         '"}"': 'punctuation.definition.function.body.end.bracket.curly.js',
         '"return"': 'keyword.control.js',
+        '"+"': 'keyword.operator.js',
+        'number': 'constant.numeric.decimal.js'
       })
 
       const layer = new TreeSitterDecorationLayer({buffer, language: javascriptLanguage, scopeMap})
@@ -38,59 +40,94 @@ describe('TreeSitterDecorationLayer', function () {
       assert.deepEqual(iterator.getCloseTags(), [])
       assert.deepEqual(iterator.getOpenTags(), ['source.js', 'meta.function.js', 'storage.type.function.js'])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function'.length})
       assert.deepEqual(iterator.getCloseTags(), ['storage.type.function.js'])
       assert.deepEqual(iterator.getOpenTags(), [])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function '.length})
       assert.deepEqual(iterator.getCloseTags(), [])
       assert.deepEqual(iterator.getOpenTags(), ['entity.name.function.js'])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo'.length})
       assert.deepEqual(iterator.getCloseTags(), ['entity.name.function.js'])
       assert.deepEqual(iterator.getOpenTags(), [])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo '.length})
       assert.deepEqual(iterator.getCloseTags(), [])
       assert.deepEqual(iterator.getOpenTags(), ['meta.parameters.js', 'punctuation.definition.parameters.begin.bracket.round.js'])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo ('.length})
       assert.deepEqual(iterator.getCloseTags(), ['punctuation.definition.parameters.begin.bracket.round.js'])
       assert.deepEqual(iterator.getOpenTags(), ['variable.parameter.function.js'])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a'.length})
       assert.deepEqual(iterator.getCloseTags(), ['variable.parameter.function.js'])
       assert.deepEqual(iterator.getOpenTags(), ['punctuation.definition.parameters.end.bracket.round.js'])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a)'.length})
       assert.deepEqual(iterator.getCloseTags(), ['punctuation.definition.parameters.end.bracket.round.js', 'meta.parameters.js'])
       assert.deepEqual(iterator.getOpenTags(), [])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) '.length})
       assert.deepEqual(iterator.getCloseTags(), [])
       assert.deepEqual(iterator.getOpenTags(), ['punctuation.definition.function.body.begin.bracket.curly.js'])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) {'.length})
       assert.deepEqual(iterator.getCloseTags(), ['punctuation.definition.function.body.begin.bracket.curly.js'])
       assert.deepEqual(iterator.getOpenTags(), [])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { '.length})
       assert.deepEqual(iterator.getCloseTags(), [])
       assert.deepEqual(iterator.getOpenTags(), ['keyword.control.js'])
 
-      iterator.moveToSuccessor()
+      assert(iterator.moveToSuccessor())
       assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { return'.length})
       assert.deepEqual(iterator.getCloseTags(), ['keyword.control.js'])
+      assert.deepEqual(iterator.getOpenTags(), [])
+
+      assert(iterator.moveToSuccessor())
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { return a '.length})
+      assert.deepEqual(iterator.getCloseTags(), [])
+      assert.deepEqual(iterator.getOpenTags(), ['keyword.operator.js'])
+
+      assert(iterator.moveToSuccessor())
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { return a +'.length})
+      assert.deepEqual(iterator.getCloseTags(), ['keyword.operator.js'])
+      assert.deepEqual(iterator.getOpenTags(), [])
+
+      assert(iterator.moveToSuccessor())
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { return a + '.length})
+      assert.deepEqual(iterator.getCloseTags(), [])
+      assert.deepEqual(iterator.getOpenTags(), ['constant.numeric.decimal.js'])
+
+      assert(iterator.moveToSuccessor())
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { return a + 1'.length})
+      assert.deepEqual(iterator.getCloseTags(), ['constant.numeric.decimal.js'])
+      assert.deepEqual(iterator.getOpenTags(), [])
+
+      assert(iterator.moveToSuccessor())
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { return a + 1 '.length})
+      assert.deepEqual(iterator.getCloseTags(), [])
+      assert.deepEqual(iterator.getOpenTags(), ['punctuation.definition.function.body.end.bracket.curly.js'])
+
+      assert(!iterator.moveToSuccessor())
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { return a + 1 }'.length})
+      assert.deepEqual(iterator.getCloseTags(), ['punctuation.definition.function.body.end.bracket.curly.js', 'meta.function.js', 'source.js'])
+      assert.deepEqual(iterator.getOpenTags(), [])
+
+      assert(!iterator.moveToSuccessor())
+      assert.deepEqual(iterator.getPosition(), {row: 0, column: 'function foo (a) { return a + 1 }'.length})
+      assert.deepEqual(iterator.getCloseTags(), [])
       assert.deepEqual(iterator.getOpenTags(), [])
     })
   })
