@@ -4,6 +4,7 @@ import {TextBuffer} from 'atom'
 import {assert} from 'chai'
 import dedent from 'dedent'
 import javascriptLanguage from 'tree-sitter-javascript'
+import * as point from '../lib/point-helpers'
 
 import TreeSitterDecorationLayer from '../lib/tree-sitter-decoration-layer'
 import ScopeMap from '../lib/scope-map'
@@ -65,11 +66,14 @@ function getTokens (buffer, iterator) {
   const tokenLines = []
   let currentTokenLine = []
   let currentTokenScopes = []
+
   let startPosition = {row: 0, column: 0}
   iterator.seek(startPosition)
-
   currentTokenScopes.push(...iterator.getOpenTags())
-  while (iterator.moveToSuccessor()) {
+
+  const eofPosition = buffer.getEndPosition()
+  while (point.isLessThan(iterator.getPosition(), eofPosition)) {
+    iterator.moveToSuccessor()
     const endPosition = iterator.getPosition()
 
     if (endPosition.row === startPosition.row) {
@@ -88,7 +92,7 @@ function getTokens (buffer, iterator) {
     startPosition = endPosition
   }
 
-  assert.equal(currentTokenScopes.length, 0)
   tokenLines.push(currentTokenLine)
+  assert.equal(currentTokenScopes.length, 0)
   return tokenLines
 }
