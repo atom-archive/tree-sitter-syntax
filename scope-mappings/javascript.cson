@@ -1,9 +1,18 @@
 'program': 'source.js'
 'function': 'meta.function.js'
 'function > identifier': 'entity.name.function.js'
+'method_definition > identifier': 'entity.name.function.js'
+'class > identifier': 'entity.name.type.class.js'
 'formal_parameters': 'meta.parameters.js'
 'formal_parameters > identifier': 'variable.parameter.function.js'
+'member_access > identifier:nth-child(2)': 'variable.other.object.property.js'
+'pair > identifier:nth-child(0)': 'variable.other.object.property.js'
+'function_call > member_access > identifier:nth-child(2)': 'entity.name.function.js'
+'function_call > identifier:nth-child(0)': 'entity.name.function.js'
+
+'this_expression': 'variable.language.js'
 'number': 'constant.numeric.decimal.js'
+'string': 'string.quoted.single.js'
 
 '"("': 'punctuation.definition.parameters.begin.bracket.round.js'
 '")"': 'punctuation.definition.parameters.end.bracket.round.js'
@@ -11,6 +20,7 @@
 '"}"': 'punctuation.definition.function.body.end.bracket.curly.js'
 '"+"': 'keyword.operator.js'
 
+'"new"': 'keyword.operator.new.js'
 '"var"': 'storage.type.var.js'
 '"from"': 'keyword.control.js'
 '"const"': 'storage.modifier.js'

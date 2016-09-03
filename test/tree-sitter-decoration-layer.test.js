@@ -36,6 +36,8 @@ describe('TreeSitterDecorationLayer', function () {
       const layer = new TreeSitterDecorationLayer({buffer, language: javascriptLanguage, scopeMap})
       const iterator = layer.buildIterator()
 
+      console.log(getTokens(buffer, iterator));
+
       assert.deepEqual(getTokens(buffer, iterator), [
         [
           {text: 'function', scopes: ['source.js', 'meta.function.js', 'storage.type.function.js']},
