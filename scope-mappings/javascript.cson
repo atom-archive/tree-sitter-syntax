@@ -22,7 +22,7 @@
 'false': 'constant.language.boolean.false.js'
 'comment': 'comment.block.js'
 
-# 'ERROR': 'invalid.illegal'
+'ERROR': 'syntax-error'
 
 '"("': 'punctuation.definition.parameters.begin.bracket.round.js'
 '")"': 'punctuation.definition.parameters.end.bracket.round.js'
