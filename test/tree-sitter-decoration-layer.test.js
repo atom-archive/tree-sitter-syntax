@@ -3,8 +3,10 @@
 import {TextBuffer} from 'atom'
 import {assert} from 'chai'
 import dedent from 'dedent'
+import {Document} from 'tree-sitter'
 import javascriptLanguage from 'tree-sitter-javascript'
 import * as point from '../lib/point-helpers'
+import InputAdaptor from '../lib/input-adapter'
 
 import TreeSitterDecorationLayer from '../lib/tree-sitter-decoration-layer'
 import ScopeMap from '../lib/scope-map'
@@ -33,10 +35,12 @@ describe('TreeSitterDecorationLayer', function () {
         'number': 'constant.numeric.decimal.js'
       })
 
-      const layer = new TreeSitterDecorationLayer({buffer, language: javascriptLanguage, scopeMap})
-      const iterator = layer.buildIterator()
+      const document = new Document()
+        .setInput(new InputAdaptor(buffer))
+        .setLanguage(javascriptLanguage)
 
-      console.log(getTokens(buffer, iterator));
+      const layer = new TreeSitterDecorationLayer({buffer, document, scopeMap})
+      const iterator = layer.buildIterator()
 
       assert.deepEqual(getTokens(buffer, iterator), [
         [

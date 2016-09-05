@@ -1,2 +1,9 @@
 'atom-text-editor:not([mini])':
-  'ctrl-alt-s': 'tree-sitter-syntax:toggle'
+  'ctrl-alt-up': 'syntax-tree:select-up'
+  'ctrl-alt-down': 'syntax-tree:select-down'
+  'ctrl-alt-left': 'syntax-tree:select-left'
+  'ctrl-alt-right': 'syntax-tree:select-right'
+
+  'ctrl-alt-t': 'syntax-tree:print-tree'
+  'ctrl-alt-d': 'syntax-tree:toggle-debug'
+  'ctrl-alt-e': 'syntax-tree:select-next-error'
