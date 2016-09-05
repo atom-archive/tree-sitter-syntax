@@ -22,5 +22,19 @@
     "chai": "^3.5.0",
     "dedent": "^0.6.0",
     "standard": "^8.0.0"
+  },
+  "configSchema": {
+    "enabledLanguages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "javascript",
+          "go",
+          "c"
+        ]
+      },
+      "default": ["javascript", "go"]
+    }
   }
 }
