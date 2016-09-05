@@ -1,0 +1,45 @@
+'ERROR': 'syntax-error'
+'comment': 'comment.block.js'
+
+'"var"': 'keyword.import.go'
+'"type"': 'keyword.type.go'
+'"func"': 'keyword.function.go'
+'"const"': 'keyword.import.go'
+'"struct"': 'keyword.struct.go'
+'"import"': 'keyword.import.go'
+'"package"': 'keyword.package.go'
+
+'"if"': 'keyword.control.go'
+'"for"': 'keyword.control.go'
+'"else"': 'keyword.control.go'
+'"case"': 'keyword.control.go'
+'"break"': 'keyword.control.go'
+'"switch"': 'keyword.control.go'
+'"return"': 'keyword.control.go'
+'"default"': 'keyword.control.go'
+'"continue"': 'keyword.control.go'
+
+'interpreted_string_literal': 'string.quoted.double.go'
+'raw_string_literal': 'string.quoted.double.go'
+'rune_literal': 'constant.other.rune.go'
+'int_literal': 'constant.numeric.integer.go'
+
+'call_expression > identifier:nth-child(0)': 'support.function.go'
+'call_expression > selector_expression > identifier:nth-child(2)': 'support.function.go'
+
+'package_clause > identifier': 'entity.name.package.go'
+
+'type_spec > identifier:nth-child(0)': 'entity.name.type.go'
+'method_declaration > identifier:nth-child(2)': 'entity.name.function.go'
+'function_declaration > identifier:nth-child(1)': 'entity.name.function.go'
+
+# TODO: expose the `type` grammar rule itself, so that we can directly refer
+# to type names.
+'pointer_type > identifier:nth-child(1)': 'storage.type.go'
+'field_declaration > identifier:nth-child(1)': 'storage.type.go'
+'parameter_declaration > identifier:nth-child(1)': 'storage.type.go'
+'slice_type > identifier:nth-child(2)': 'storage.type.go'
+
+'keyed_element > identifier:nth-child(0)': 'variable.other.object.property.go'
+'selector_expression > identifier:nth-child(2)': 'variable.other.object.property.go'
+'field_declaration > identifier_list:nth-child(0)': 'variable.other.object.property.go'
