@@ -1,0 +1,35 @@
+'comment': 'comment.block.js'
+
+'ERROR': 'syntax-error'
+
+'"static"': 'storage.modifier.c'
+
+'preproc_function_def > identifier:nth-child(1)': 'entity.name.function.preprocessor.c'
+'preproc_arg': 'meta.preprocessor.macro.c'
+
+'"#define"': 'keyword.control.directive.define.c'
+'"#include"': 'keyword.control.directive.include.c'
+
+'field_expression > identifier:nth-child(2)': 'variable.other.member.c'
+'struct_declaration > identifier:nth-child(1)': 'variable.other.member.c'
+'struct_declaration > pointer_declarator:nth-child(1) > identifier': 'variable.other.member.c'
+
+# TODO: expose the `type` rule and refer to it directly
+'declaration > identifier:nth-child(0)': 'storage.type.c'
+'struct_declaration > identifier:nth-child(0)': 'storage.type.c'
+'function_definition > identifier:nth-child(0)': 'storage.type.c'
+
+'string_literal': 'string.quoted.double.c'
+'system_lib_string': 'string.quoted.other.lt-gt.include.c'
+
+'"if"': 'keyword.control.c'
+'"else"': 'keyword.control.c'
+'"do"': 'keyword.control.c'
+'"for"': 'keyword.control.c'
+'"while"': 'keyword.control.c'
+'"break"': 'keyword.control.c'
+'"continue"': 'keyword.control.c'
+'"return"': 'keyword.control.c'
+'"switch"': 'keyword.control.c'
+'"case"': 'keyword.control.c'
+'"default"': 'keyword.control.c'
