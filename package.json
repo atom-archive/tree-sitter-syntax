@@ -32,10 +32,11 @@
         "enum": [
           "javascript",
           "go",
-          "c"
+          "c",
+          "python"
         ]
       },
-      "default": ["javascript", "go"]
+      "default": ["javascript", "go", "python"]
     }
   }
 }
