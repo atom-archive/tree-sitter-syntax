@@ -1,5 +1,4 @@
 # tree-sitter-syntax package
 
-A short description of your package.
+Provides AST-based syntax highlighting in Atom using [tree-sitter](https://github.com/tree-sitter/tree-sitter). Experimental. Don't use this yet.
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
