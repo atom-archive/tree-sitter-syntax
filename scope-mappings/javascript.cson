@@ -11,6 +11,9 @@
 'function_call > identifier': 'entity.name.function.js'
 'new_expression > function_call > identifier': 'meta.class.instance.constructor'
 
+'import_specifier > identifier': 'variable.other.module'
+'import_clause > identifier': 'variable.other.module'
+
 'this_expression': 'variable.language.js'
 'number': 'constant.numeric.decimal.js'
 'string': 'string.quoted.single.js'
