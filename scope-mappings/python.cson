@@ -12,8 +12,13 @@
 'attribute > identifier:nth-child(2)': 'variable.other.object.property.python'
 'decorator': 'entity.name.function.decorator.python'
 
+'none': 'constant.language.python'
+'true': 'constant.language.python'
+'false': 'constant.language.python'
+
 '"class"': 'storage.type.class.python'
 '"def"': 'storage.type.function.python'
+'"lambda"': 'storage.type.function.inline.python'
 
 '"if"': 'keyword.control.python'
 '"else"': 'keyword.control.python'
