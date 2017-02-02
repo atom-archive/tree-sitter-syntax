@@ -68,3 +68,6 @@
 '"export"': 'keyword.control.js'
 '"import"': 'keyword.control.js'
 '"from"': 'keyword.control.js'
+'"yield"': 'keyword.control.js'
+'"async"': 'keyword.control.js'
+'"await"': 'keyword.control.js'
