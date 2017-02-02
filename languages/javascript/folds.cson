@@ -1,0 +1,10 @@
+delimiters: [
+  ['{', '}'],
+  ['(', ')'],
+  ['[', ']']
+],
+
+tokens: [
+  ['comment', 2, 2],
+  ['template_string', 1, 1]
+]
