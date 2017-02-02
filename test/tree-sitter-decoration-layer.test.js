@@ -1,18 +1,14 @@
-/** @babel */
-
-import {TextBuffer} from 'atom'
-import {assert} from 'chai'
-import dedent from 'dedent'
-import {Document} from 'tree-sitter'
-import javascriptLanguage from 'tree-sitter-javascript'
-import * as point from '../lib/point-helpers'
-import InputAdaptor from '../lib/input-adapter'
-
-import TreeSitterDecorationLayer from '../lib/tree-sitter-decoration-layer'
-import ScopeMap from '../lib/scope-map'
+const {TextBuffer} = require('atom');
+const {assert} = require('chai');
+const dedent = require('dedent');
+const {Document} = require('tree-sitter');
+const javascriptLanguage = require('tree-sitter-javascript');
+const point = require('../lib/point-helpers');
+const InputAdaptor = require('../lib/input-adapter');
+const TreeSitterDecorationLayer = require('../lib/tree-sitter-decoration-layer');
+const ScopeMap = require('../lib/scope-map');
 
 describe('TreeSitterDecorationLayer', function () {
-
   describe('iterator', function () {
     it('reports a tag boundary at relevant nodes in the tree', function () {
       const buffer = new TextBuffer(dedent`
@@ -65,7 +61,6 @@ describe('TreeSitterDecorationLayer', function () {
       ])
     })
   })
-
 })
 
 function getTokens (buffer, iterator) {

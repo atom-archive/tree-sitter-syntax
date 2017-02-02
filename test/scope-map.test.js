@@ -1,7 +1,7 @@
 /** @babel */
 
-import {assert} from 'chai'
-import ScopeMap from '../lib/scope-map'
+const {assert} = require('chai');
+const ScopeMap = require('../lib/scope-map');
 
 describe('ScopeMap', function () {
   describe('scopeNameForNode(node)', function () {
