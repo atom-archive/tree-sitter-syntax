@@ -29,19 +29,30 @@ function getVariableUsages(currentNode, buffer) {
 
     // In each containing function, look for a parameter whose name matches.
     if (FUNCTION_TYPES.has(node.type)) {
-      const parameters = node.namedChildren.find(child =>
+      const parameterList = node.namedChildren.find(child =>
         child.type === 'formal_parameters'
       );
 
-      if (parameters) {
-        declaredVariable = parameters.namedChildren.find(child =>
-          getText(child, buffer) === variableName
-        );
+      if (parameterList) {
+        const parameters = parameterList.namedChildren;
+        for (let i = 0, n = parameters.length; i < n; i++) {
+          const parameter = parameters[i];
+          if (parameter.type === 'identifier') {
+            if (getText(parameter, buffer) === variableName) {
+              declaredVariable = parameter;
+              break;
+            }
+          } else if (parameter.type === 'assignment_pattern') {
+            if (declaredVariable = parameter.firstChild.namedChildren.find(child =>
+              getText(child, buffer) === variableName
+            )) break;
+          }
+        }
       } else {
 
         // Arrow functions may have a single parameter instead of a parameter
         // list.
-        const singleParameter = node.children[0];
+        const singleParameter = node.firstChild;
         if (singleParameter.type === 'identifier' &&
             getText(singleParameter, buffer) === variableName) {
           declaredVariable = singleParameter;
@@ -56,7 +67,7 @@ function getVariableUsages(currentNode, buffer) {
         // Arrow functions may have a single expression as their body, instead
         // of a statement block.
         if (!declaredVariableScope) {
-          declaredVariableScope = node.children[node.children.length - 1];
+          declaredVariableScope = node.lastChild;
         }
       }
     } else {
@@ -79,7 +90,7 @@ function getVariableUsages(currentNode, buffer) {
                 variable = declarationComponent;
                 break;
               case 'var_assignment':
-                variable = declarationComponent.children[0];
+                variable = declarationComponent.firstChild;
                 break;
               default:
                 continue;
