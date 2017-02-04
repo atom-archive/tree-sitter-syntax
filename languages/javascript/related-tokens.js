@@ -1,10 +1,3 @@
-module.exports =
-function (node, buffer) {
-  switch (node.type) {
-    case 'identifier': return getVariableUsages(node, buffer)
-  }
-};
-
 const FUNCTION_TYPES = new Set([
   'function',
   'method_definition',
@@ -16,6 +9,39 @@ const SCOPE_TYPES = new Set([
   'program',
   ...FUNCTION_TYPES
 ]);
+
+module.exports =
+function (node, buffer) {
+  if (node.type === 'identifier') {
+    const {parent} = node;
+    switch (parent.type) {
+      case 'jsx_opening_element':
+        return [
+          {
+            node,
+            highlightClass: 'matching-tag'
+          },
+          {
+            node: parent.parent.lastChild.firstNamedChild,
+            highlightClass: 'matching-tag'
+          }
+        ];
+      case 'jsx_closing_element':
+        return [
+          {
+            node,
+            highlightClass: 'matching-tag'
+          },
+          {
+            node: parent.parent.firstChild.firstNamedChild,
+            highlightClass: 'matching-tag'
+          },
+        ];
+      default:
+        return getVariableUsages(node, buffer);
+    }
+  }
+};
 
 function getVariableUsages(currentNode, buffer) {
   const results = [];

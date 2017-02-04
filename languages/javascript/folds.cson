@@ -1,7 +1,8 @@
 delimiters: [
   ['{', '}']
   ['(', ')']
-  ['[', ']']
+  ['[', ']'],
+  ['jsx_opening_element', 'jsx_closing_element']
 ],
 
 tokens: [
