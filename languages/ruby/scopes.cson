@@ -1,4 +1,5 @@
 '"if"': 'keyword.control'
+'"unless"': 'keyword.control'
 '"def"': 'keyword.control'
 '"do"': 'keyword.control'
 '"end"': 'keyword.control'
@@ -8,8 +9,11 @@
 '"module"': 'keyword.control'
 '"begin"': 'keyword.control'
 '"rescue"': 'keyword.control'
+'"ensure"': 'keyword.control'
 '"return"': 'keyword.control'
 '"yield"': 'keyword.control'
+'"case"': 'keyword.control'
+'"when"': 'keyword.control'
 
 'constant': 'entity.name.type.class'
 'superclass > identifier': 'entity.name.type.class.ruby'
@@ -26,6 +30,7 @@
 'regex': 'string.regex'
 'heredoc_beginning': 'string'
 'heredoc_end': 'string'
+'integer': 'constant.numeric'
 
 'nil': 'constant.language.nil'
 'true': 'constant.language.true'

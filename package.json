@@ -17,7 +17,7 @@
     "tree-sitter-go": "^0.1.4",
     "tree-sitter-javascript": "^0.1.7",
     "tree-sitter-python": "^0.0.2",
-    "tree-sitter-ruby": "^0.0.2",
+    "tree-sitter-ruby": "^0.0.3",
     "season": "^5.3"
   },
   "devDependencies": {
