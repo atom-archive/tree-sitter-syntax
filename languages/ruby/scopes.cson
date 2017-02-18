@@ -16,12 +16,14 @@
 '"when"': 'keyword.control'
 
 'constant': 'entity.name.type.class'
-'superclass > identifier': 'entity.name.type.class.ruby'
+
+'self': 'variable.other'
+
 'method > identifier': 'entity.name.function'
-'scope_resolution > identifier': 'support.class'
 'call > identifier:nth-child(2)': 'entity.name.function'
 'method_call > identifier:nth-child(0)': 'entity.name.function'
 
+'class_variable': 'variable.other.object.property'
 'instance_variable': 'variable.other.object.property'
 'symbol': 'constant.other'
 
