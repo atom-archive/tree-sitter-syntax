@@ -12,12 +12,12 @@
   "atomTestRunner": "atom-mocha-test-runner",
   "dependencies": {
     "postcss-selector-parser": "^2.2.1",
-    "tree-sitter": "^0.4.0",
+    "tree-sitter": "^0.4.6",
     "tree-sitter-c": "^0.1.5",
     "tree-sitter-go": "^0.1.4",
-    "tree-sitter-javascript": "^0.1.7",
+    "tree-sitter-javascript": "^0.1.8",
     "tree-sitter-python": "^0.0.2",
-    "tree-sitter-ruby": "^0.0.3",
+    "tree-sitter-ruby": "^0.0.4",
     "season": "^5.3"
   },
   "devDependencies": {
