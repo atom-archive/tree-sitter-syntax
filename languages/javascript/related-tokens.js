@@ -101,34 +101,15 @@ function getVariableUsages(currentNode, buffer) {
       // In each containing statement block, look for a declaration whose
       // name matches.
       const statements = node.namedChildren;
-
-      statement_loop:
       for (let i = 0, n = statements.length; i < n; i++) {
         const statement = statements[i];
-        if (statement.type === 'var_declaration') {
-          const declarationComponents = statement.namedChildren;
-          for (let j = 0, m = declarationComponents.length; j < m; j++) {
-            const declarationComponent = declarationComponents[j];
-
-            let variable;
-            switch (declarationComponent.type) {
-              case 'identifier':
-                variable = declarationComponent;
-                break;
-              case 'var_assignment':
-                variable = declarationComponent.firstChild;
-                break;
-              default:
-                continue;
-            }
-
-            if (getText(variable, buffer) === variableName) {
-              declaredVariable = variable;
-              declaredVariableScope = node;
-              break statement_loop;
-            }
+        eachDeclaredVariable(statement, (variable) => {
+          if (getText(variable, buffer) === variableName) {
+            declaredVariable = variable;
+            declaredVariableScope = node;
+            return true;
           }
-        }
+        });
       }
     }
 
@@ -153,6 +134,45 @@ function getVariableUsages(currentNode, buffer) {
   }
 
   return results
+}
+
+function eachDeclaredVariable(statement, callback) {
+  if (statement.type === 'var_declaration') {
+    const declarationComponents = statement.namedChildren;
+    for (let i = 0, m = declarationComponents.length; i < m; i++) {
+      const declarationComponent = declarationComponents[i];
+
+      switch (declarationComponent.type) {
+        case 'identifier':
+          if (callback(declarationComponent)) return;
+          break;
+
+        case 'var_assignment':
+          const leftHandSide = declarationComponent.firstChild;
+          switch (leftHandSide.type) {
+            case 'identifier':
+              if (callback(leftHandSide)) return;
+              break;
+
+            case 'assignment_pattern':
+              const patternChildren = leftHandSide.firstChild.namedChildren;
+              for (let j = 0, n = patternChildren.length; j < n; j++) {
+                const patternChild = patternChildren[j];
+                switch (patternChild.type) {
+                  case 'identifier':
+                    if (callback(patternChild)) return;
+                    break;
+
+                  case 'pair':
+                    if (callback(patternChild.lastChild)) return;
+                    break;
+                }
+              }
+              break;
+          }
+      }
+    }
+  }
 }
 
 function getText(node, buffer) {
