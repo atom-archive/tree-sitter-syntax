@@ -122,6 +122,8 @@ function getVariableUsages(currentNode, buffer) {
         const identifier = identifiers[i];
         if (identifier.id !== declaredVariable.id) {
           if (getText(identifier, buffer) === variableName) {
+            const {parent} = identifier;
+            if (parent.type === 'member_access' && identifier.startIndex !== parent.startIndex) continue;
             results.push({node: identifier, highlightClass: 'variable-usage'})
           }
         }
@@ -137,6 +139,8 @@ function getVariableUsages(currentNode, buffer) {
 }
 
 function eachDeclaredVariable(statement, callback) {
+  if (statement.type === 'for_statement') statement = statement.firstNamedChild;
+
   if (statement.type === 'var_declaration') {
     const declarationComponents = statement.namedChildren;
     for (let i = 0, m = declarationComponents.length; i < m; i++) {
