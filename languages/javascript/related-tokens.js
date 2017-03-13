@@ -38,7 +38,9 @@ function (node, buffer) {
           },
         ];
       default:
-        return getVariableUsages(node, buffer);
+        if (!isPropertyName(node)) {
+          return getVariableUsages(node, buffer);
+        }
     }
   }
 };
@@ -122,8 +124,7 @@ function getVariableUsages(currentNode, buffer) {
         const identifier = identifiers[i];
         if (identifier.id !== declaredVariable.id) {
           if (getText(identifier, buffer) === variableName) {
-            const {parent} = identifier;
-            if (parent.type === 'member_access' && identifier.startIndex !== parent.startIndex) continue;
+            if (isPropertyName(identifier)) continue;
             results.push({node: identifier, highlightClass: 'variable-usage'})
           }
         }
@@ -181,6 +182,11 @@ function eachDeclaredVariable(statement, callback) {
 
 function getText(node, buffer) {
   return buffer.getTextInRange([node.startPosition, node.endPosition]);
+}
+
+function isPropertyName(identifier) {
+  const {parent} = identifier;
+  return parent.type === 'member_access' && identifier.startIndex !== parent.startIndex;
 }
 
 function closest(node, types) {
