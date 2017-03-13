@@ -5,6 +5,7 @@ delimiters: [
   ['begin', 'end'],
   ['do', 'end', {afterType: 'block_parameters'}],
   ['def', 'end', {afterChildCount: 1, afterType: 'method_parameters'}],
+  ['unless', 'end', {afterChildCount: 1}],
   ['if', 'end', {afterChildCount: 1}],
   ['case', 'end', {afterChildCount: 1}],
   ['class', 'end', {afterChildCount: 1, afterType: 'superclass'}]
