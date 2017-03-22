@@ -70,7 +70,7 @@ function getVariableUsages(currentNode, buffer) {
               declaredVariable = parameter;
               break;
             }
-          } else if (parameter.type === 'assignment_pattern') {
+          } else if (parameter.type === 'destructuring_pattern') {
             if (declaredVariable = parameter.firstChild.namedChildren.find(child =>
               getText(child, buffer) === variableName
             )) break;
@@ -142,7 +142,7 @@ function getVariableUsages(currentNode, buffer) {
 function eachDeclaredVariable(statement, callback) {
   if (statement.type === 'for_statement') statement = statement.firstNamedChild;
 
-  if (statement.type === 'var_declaration') {
+  if (statement.type === 'variable_declaration' || statement.type === 'lexical_declaration') {
     const declarationComponents = statement.namedChildren;
     for (let i = 0, m = declarationComponents.length; i < m; i++) {
       const declarationComponent = declarationComponents[i];
@@ -152,14 +152,14 @@ function eachDeclaredVariable(statement, callback) {
           if (callback(declarationComponent)) return;
           break;
 
-        case 'var_assignment':
+        case 'variable_declarator':
           const leftHandSide = declarationComponent.firstChild;
           switch (leftHandSide.type) {
             case 'identifier':
               if (callback(leftHandSide)) return;
               break;
 
-            case 'assignment_pattern':
+            case 'destructuring_pattern':
               const patternChildren = leftHandSide.firstChild.namedChildren;
               for (let j = 0, n = patternChildren.length; j < n; j++) {
                 const patternChild = patternChildren[j];
