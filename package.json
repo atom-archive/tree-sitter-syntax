@@ -40,6 +40,17 @@
         ]
       },
       "default": ["javascript", "go", "python", "ruby"]
+    },
+    "semanticHighlighting": {
+      "description": "Assign CSS classes to identifiers in code based on their name. Requires a syntax theme with support for semantic highlighting.",
+      "type": "boolean",
+      "default": false
+    },
+    "numberOfIdentifierClasses": {
+      "description": "When semantic highlighting is enabled, each identifier is assigned one of this many classes. If set to 0, each identifier is assigned a different class.",
+      "type": "integer",
+      "minimum": 0,
+      "default": 8
     }
   }
 }
