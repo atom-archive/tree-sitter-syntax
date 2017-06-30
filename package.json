@@ -22,7 +22,7 @@
     "season": "^5.3"
   },
   "devDependencies": {
-    "atom-mocha-test-runner": "^0.2.2",
+    "atom-mocha-test-runner": "^1.0.1",
     "chai": "^3.5.0",
     "dedent": "^0.6.0",
     "standard": "^8.0.0"
