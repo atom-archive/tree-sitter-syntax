@@ -41,7 +41,7 @@
           "ruby"
         ]
       },
-      "default": ["javascript", "go", "python", "ruby"]
+      "default": []
     }
   }
 }
