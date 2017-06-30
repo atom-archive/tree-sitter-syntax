@@ -1,0 +1,49 @@
+.syntax--semantic {
+  &, & * {
+    color: #bbb !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+  }
+
+  .syntax--comment {
+    color: #777 !important;
+  }
+
+  .syntax--string {
+    color: #3d0 !important;
+  }
+
+  .syntax--keyword,
+  .syntax--storage,
+  .syntax--language {
+    color: #fff !important;
+  }
+
+  .syntax--identifier {
+    .identifier-colors(8);
+
+    .identifier-colors(@n, @i: 0) when (@i < @n) {
+      &.syntax--identifier-@{i} {
+        // Identifiers declared in immediate succession are sibling nodes,
+        // and are therefore often assigned consecutive indices.
+        // Since the color scheme uses a gradient, this would lead to
+        // such identifiers being drawn in hard-to-distinguish colors.
+        // The following line "shuffles" the gradient, which works as long as
+        // the multiplier (3) is a generator of the additive group Z/nZ.
+        @index: mod(3 * @i, @n);
+        color: mix(#f43, #ed0, percentage(@index / (@n - 1))) !important;
+      }
+
+      .identifier-colors(@n, @i + 1);
+    }
+
+    &.syntax--property {
+      font-style: italic !important;
+    }
+
+    &.syntax--class,
+    &.syntax--function:not(.syntax--parameter) {
+      font-weight: bold !important;
+    }
+  }
+}
