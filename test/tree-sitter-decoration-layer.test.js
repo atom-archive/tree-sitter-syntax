@@ -12,7 +12,7 @@ describe('TreeSitterDecorationLayer', function () {
   describe('iterator', function () {
     it('reports a tag boundary at relevant nodes in the tree', function () {
       const buffer = new TextBuffer(dedent`
-        function foo (a) { return a + 1 }
+        function foo (a) { return a + 1; }
       `)
 
       const scopeMap = new ScopeMap({
@@ -38,26 +38,24 @@ describe('TreeSitterDecorationLayer', function () {
       const layer = new TreeSitterDecorationLayer({buffer, document, scopeMap})
       const iterator = layer.buildIterator()
 
-      assert.deepEqual(getTokens(buffer, iterator), [
-        [
-          {text: 'function', scopes: ['source.js', 'meta.function.js', 'storage.type.function.js']},
-          {text: ' ', scopes: ['source.js', 'meta.function.js']},
-          {text: 'foo', scopes: ['source.js', 'meta.function.js', 'entity.name.function.js']},
-          {text: ' ', scopes: ['source.js', 'meta.function.js']},
-          {text: '(', scopes: ['source.js', 'meta.function.js', 'meta.parameters.js', 'punctuation.definition.parameters.begin.bracket.round.js']},
-          {text: 'a', scopes: ['source.js', 'meta.function.js', 'meta.parameters.js', 'variable.parameter.function.js']},
-          {text: ')', scopes: ['source.js', 'meta.function.js', 'meta.parameters.js', 'punctuation.definition.parameters.end.bracket.round.js']},
-          {text: ' ', scopes: ['source.js', 'meta.function.js']},
-          {text: '{', scopes: ['source.js', 'meta.function.js', 'punctuation.definition.function.body.begin.bracket.curly.js']},
-          {text: ' ', scopes: ['source.js', 'meta.function.js']},
-          {text: 'return', scopes: ['source.js', 'meta.function.js', 'keyword.control.js']},
-          {text: ' a ', scopes: ['source.js', 'meta.function.js']},
-          {text: '+', scopes: ['source.js', 'meta.function.js', 'keyword.operator.js']},
-          {text: ' ', scopes: ['source.js', 'meta.function.js']},
-          {text: '1', scopes: ['source.js', 'meta.function.js', 'constant.numeric.decimal.js']},
-          {text: ' ', scopes: ['source.js', 'meta.function.js']},
-          {text: '}', scopes: ['source.js', 'meta.function.js', 'punctuation.definition.function.body.end.bracket.curly.js']},
-        ]
+      assert.deepEqual(getTokens(buffer, iterator)[0], [
+        {text: 'function', scopes: ['source.js', 'meta.function.js', 'storage.type.function.js']},
+        {text: ' ', scopes: ['source.js', 'meta.function.js']},
+        {text: 'foo', scopes: ['source.js', 'meta.function.js', 'entity.name.function.js']},
+        {text: ' ', scopes: ['source.js', 'meta.function.js']},
+        {text: '(', scopes: ['source.js', 'meta.function.js', 'meta.parameters.js', 'punctuation.definition.parameters.begin.bracket.round.js']},
+        {text: 'a', scopes: ['source.js', 'meta.function.js', 'meta.parameters.js', 'variable.parameter.function.js']},
+        {text: ')', scopes: ['source.js', 'meta.function.js', 'meta.parameters.js', 'punctuation.definition.parameters.end.bracket.round.js']},
+        {text: ' ', scopes: ['source.js', 'meta.function.js']},
+        {text: '{', scopes: ['source.js', 'meta.function.js', 'punctuation.definition.function.body.begin.bracket.curly.js']},
+        {text: ' ', scopes: ['source.js', 'meta.function.js']},
+        {text: 'return', scopes: ['source.js', 'meta.function.js', 'keyword.control.js']},
+        {text: ' a ', scopes: ['source.js', 'meta.function.js']},
+        {text: '+', scopes: ['source.js', 'meta.function.js', 'keyword.operator.js']},
+        {text: ' ', scopes: ['source.js', 'meta.function.js']},
+        {text: '1', scopes: ['source.js', 'meta.function.js', 'constant.numeric.decimal.js']},
+        {text: '; ', scopes: ['source.js', 'meta.function.js']},
+        {text: '}', scopes: ['source.js', 'meta.function.js', 'punctuation.definition.function.body.end.bracket.curly.js']}
       ])
     })
   })
