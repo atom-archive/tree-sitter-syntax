@@ -62,5 +62,22 @@ describe('ScopeMap', function () {
       assert.equal(map.get(['a', 'b'], [0, 0], false), 'x')
       assert.equal(map.get(['a', 'b'], [0, 1], false), 'y')
     })
+
+    it('supports the wildcard selector', () => {
+      const map = new ScopeMap({
+        '*': 'w',
+        'a > *': 'x',
+        'a > *:nth-child(1)': 'y',
+        'a > *:nth-child(1) > b': 'z',
+      })
+
+      assert.equal(map.get(['b'], [0]), 'w')
+      assert.equal(map.get(['c'], [0]), 'w')
+      assert.equal(map.get(['a', 'b'], [0, 0]), 'x')
+      assert.equal(map.get(['a', 'b'], [0, 1]), 'y')
+      assert.equal(map.get(['a', 'c'], [0, 1]), 'y')
+      assert.equal(map.get(['a', 'c', 'b'], [0, 1, 1]), 'z')
+      assert.equal(map.get(['a', 'c', 'b'], [0, 2, 1]), 'w')
+    })
   })
 })
