@@ -68,7 +68,7 @@ function getTokens (buffer, iterator) {
 
   let startPosition = {row: 0, column: 0}
   iterator.seek(startPosition)
-  currentTokenScopes.push(...getOpenTags(iterator))
+  currentTokenScopes.push(...getOpenClasses(iterator))
 
   const eofPosition = buffer.getEndPosition()
   while (point.isLessThan(iterator.getPosition(), eofPosition)) {
@@ -87,7 +87,7 @@ function getTokens (buffer, iterator) {
       assert.equal(currentTokenScopes.pop(), closeTag)
     }
 
-    currentTokenScopes.push(...getOpenTags(iterator))
+    currentTokenScopes.push(...getOpenClasses(iterator))
     startPosition = endPosition
   }
 
@@ -96,7 +96,7 @@ function getTokens (buffer, iterator) {
   return tokenLines
 }
 
-function getOpenTags (iterator) {
+function getOpenClasses (iterator) {
   return iterator.getOpenScopeIds().map(id => iterator.layer.classNameForScopeId(id).replace(/ /g, '.'))
 }
 
