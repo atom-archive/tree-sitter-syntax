@@ -12,36 +12,38 @@ const SCOPE_TYPES = new Set([
 
 module.exports =
 function (node, buffer) {
-  if (node.type === 'identifier') {
-    const {parent} = node;
-    switch (parent.type) {
-      case 'jsx_opening_element':
-        return [
-          {
-            node,
-            highlightClass: 'matching-tag'
-          },
-          {
-            node: parent.parent.lastChild.firstNamedChild,
-            highlightClass: 'matching-tag'
-          }
-        ];
-      case 'jsx_closing_element':
-        return [
-          {
-            node,
-            highlightClass: 'matching-tag'
-          },
-          {
-            node: parent.parent.firstChild.firstNamedChild,
-            highlightClass: 'matching-tag'
-          },
-        ];
-      default:
-        if (!isPropertyName(node)) {
-          return getVariableUsages(node, buffer);
-        }
-    }
+  switch (node.type) {
+    case 'variable_name':
+    case 'shorthand_property_name':
+      return getVariableUsages(node, buffer);
+
+    case 'identifier':
+      const {parent} = node;
+      switch (parent.type) {
+        case 'jsx_opening_element':
+          return [
+            {
+              node,
+              highlightClass: 'matching-tag'
+            },
+            {
+              node: parent.parent.lastChild.firstNamedChild,
+              highlightClass: 'matching-tag'
+            }
+          ];
+        case 'jsx_closing_element':
+          return [
+            {
+              node,
+              highlightClass: 'matching-tag'
+            },
+            {
+              node: parent.parent.firstChild.firstNamedChild,
+              highlightClass: 'matching-tag'
+            },
+          ];
+      }
+      break;
   }
 };
 
@@ -65,13 +67,13 @@ function getVariableUsages(currentNode, buffer) {
         const parameters = parameterList.namedChildren;
         for (let i = 0, n = parameters.length; i < n; i++) {
           const parameter = parameters[i];
-          if (parameter.type === 'identifier') {
+          if (parameter.type === 'variable_name') {
             if (getText(parameter, buffer) === variableName) {
               declaredVariable = parameter;
               break;
             }
-          } else if (parameter.type === 'destructuring_pattern') {
-            if (declaredVariable = parameter.firstChild.namedChildren.find(child =>
+          } else if (parameter.type === 'object_pattern' || parameter.type === 'array_pattern') {
+            if (declaredVariable = parameter.namedChildren.find(child =>
               getText(child, buffer) === variableName
             )) break;
           }
@@ -81,7 +83,7 @@ function getVariableUsages(currentNode, buffer) {
         // Arrow functions may have a single parameter instead of a parameter
         // list.
         const singleParameter = node.firstChild;
-        if (singleParameter.type === 'identifier' &&
+        if (singleParameter.type === 'variable_name' &&
             getText(singleParameter, buffer) === variableName) {
           declaredVariable = singleParameter;
         }
@@ -119,12 +121,11 @@ function getVariableUsages(currentNode, buffer) {
     if (declaredVariable) {
       results.push({node: declaredVariable, highlightClass: 'variable-definition'})
 
-      const identifiers = findAll(declaredVariableScope, 'identifier');
+      const identifiers = findAll(declaredVariableScope, 'variable_name');
       for (let i = 0, n = identifiers.length; i < n; i++) {
         const identifier = identifiers[i];
         if (identifier.id !== declaredVariable.id) {
           if (getText(identifier, buffer) === variableName) {
-            if (isPropertyName(identifier)) continue;
             results.push({node: identifier, highlightClass: 'variable-usage'})
           }
         }
@@ -148,23 +149,24 @@ function eachDeclaredVariable(statement, callback) {
       const declarationComponent = declarationComponents[i];
 
       switch (declarationComponent.type) {
-        case 'identifier':
+        case 'variable_name':
           if (callback(declarationComponent)) return;
           break;
 
         case 'variable_declarator':
           const leftHandSide = declarationComponent.firstChild;
           switch (leftHandSide.type) {
-            case 'identifier':
+            case 'variable_name':
               if (callback(leftHandSide)) return;
               break;
 
-            case 'destructuring_pattern':
-              const patternChildren = leftHandSide.firstChild.namedChildren;
+            case 'object_pattern':
+            case 'array_pattern':
+              const patternChildren = leftHandSide.namedChildren;
               for (let j = 0, n = patternChildren.length; j < n; j++) {
                 const patternChild = patternChildren[j];
                 switch (patternChild.type) {
-                  case 'identifier':
+                  case 'variable_name':
                     if (callback(patternChild)) return;
                     break;
 
@@ -182,11 +184,6 @@ function eachDeclaredVariable(statement, callback) {
 
 function getText(node, buffer) {
   return buffer.getTextInRange([node.startPosition, node.endPosition]);
-}
-
-function isPropertyName(identifier) {
-  const {parent} = identifier;
-  return parent.type === 'member_access' && identifier.startIndex !== parent.startIndex;
 }
 
 function closest(node, types) {

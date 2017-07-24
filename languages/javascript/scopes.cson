@@ -1,20 +1,21 @@
 'program': 'source.js'
-'function': 'meta.function'
-'function > identifier': 'entity.name.function'
-'method_definition > identifier': 'entity.name.function'
-'class > identifier': 'entity.name.type.class'
-'formal_parameters': 'meta.parameters'
-'formal_parameters > identifier': 'variable.parameter.function'
-'member_access > identifier:nth-child(2)': 'variable.other.object.property'
-'pair > identifier:nth-child(0)': 'variable.other.object.property'
-'function_call > member_access > identifier:nth-child(2)': 'entity.name.function'
-'function_call > identifier': 'entity.name.function'
+
+'class > variable_name': 'entity.name.type.class'
+
+'property_name': 'variable.other.object.property'
+
+'function > variable_name': 'entity.name.function'
+'function_call > variable_name': 'entity.name.function'
+
+'method_definition > property_name': 'entity.name.function'
+'function_call > member_access > property_name:nth-child(2)': 'entity.name.function'
+
 'new_expression > function_call > identifier': 'meta.class.instance.constructor'
 
 'import_specifier > identifier': 'variable.other.module'
 'import_clause > identifier': 'variable.other.module'
 
-'this_expression': 'variable.language'
+'this_expression': 'constant.language.this'
 'number': 'constant.numeric.decimal'
 'string': 'string.quoted.single'
 'regex': 'string.regexp'

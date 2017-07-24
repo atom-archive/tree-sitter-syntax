@@ -8,8 +8,8 @@
 'preproc_function_def > identifier:nth-child(1)': 'entity.name.function.preprocessor.c'
 'preproc_arg': 'meta.preprocessor.macro.c'
 
-'"#define"': 'keyword.control.directive.define.c'
-'"#include"': 'keyword.control.directive.include.c'
+'preproc_define': 'keyword.control.directive.define.c'
+'preproc_include': 'keyword.control.directive.include.c'
 
 'call_expression > identifier:nth-child(0)': 'entity.name.function'
 'call_expression > template_call:nth-child(0) > identifier:nth-child(0)': 'entity.name.function'
@@ -45,10 +45,15 @@
 'string_literal': 'string.quoted.double.c'
 'system_lib_string': 'string.quoted.other.lt-gt.include.c'
 
+'number_literal': 'constant.numeric.decimal'
+
+'"namespace"': 'keyword.control'
+'"using"': 'keyword.control'
 '"class"': 'keyword.control'
 '"struct"': 'keyword.control'
 
 '"static"': 'storage.modifier'
+'"inline"': 'storage.modifier'
 '"const"': 'storage.modifier'
 '"public"': 'storage.modifier'
 '"private"': 'storage.modifier'

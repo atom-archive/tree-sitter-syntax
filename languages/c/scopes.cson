@@ -2,34 +2,43 @@
 
 'ERROR': 'syntax-error'
 
-'"static"': 'storage.modifier.c'
+'preproc_function_def > identifier:nth-child(1)': 'entity.name.function.preprocessor'
+'preproc_arg': 'meta.preprocessor.macro'
 
-'preproc_function_def > identifier:nth-child(1)': 'entity.name.function.preprocessor.c'
-'preproc_arg': 'meta.preprocessor.macro.c'
+# '"#define"': 'keyword.control.directive.define'
+# '"#include"': 'keyword.control.directive.include'
 
-'"#define"': 'keyword.control.directive.define.c'
-'"#include"': 'keyword.control.directive.include.c'
+'call_expression > variable_name:nth-child(0)': 'entity.name.function'
+'call_expression > field_expression > field_name:nth-child(2)': 'entity.name.function'
 
-'field_expression > identifier:nth-child(2)': 'variable.other.member.c'
-'struct_declaration > identifier:nth-child(1)': 'variable.other.member.c'
-'struct_declaration > pointer_declarator:nth-child(1) > identifier': 'variable.other.member.c'
+'function_declarator > variable_name': 'entity.name.function'
 
-# TODO: expose the `type` rule and refer to it directly
-'declaration > identifier:nth-child(0)': 'storage.type.c'
-'struct_declaration > identifier:nth-child(0)': 'storage.type.c'
-'function_definition > identifier:nth-child(0)': 'storage.type.c'
+'field_name': 'variable.other.member'
+'type_name': 'support.type'
 
-'string_literal': 'string.quoted.double.c'
-'system_lib_string': 'string.quoted.other.lt-gt.include.c'
+'string_literal': 'string.quoted.double'
+'system_lib_string': 'string.quoted.other.lt-gt.include'
 
-'"if"': 'keyword.control.c'
-'"else"': 'keyword.control.c'
-'"do"': 'keyword.control.c'
-'"for"': 'keyword.control.c'
-'"while"': 'keyword.control.c'
-'"break"': 'keyword.control.c'
-'"continue"': 'keyword.control.c'
-'"return"': 'keyword.control.c'
-'"switch"': 'keyword.control.c'
-'"case"': 'keyword.control.c'
-'"default"': 'keyword.control.c'
+'number_literal': 'constant.numeric.decimal'
+
+'auto': 'storage.modifier'
+'"static"': 'storage.modifier'
+'"inline"': 'storage.modifier'
+'"const"': 'storage.modifier'
+'function_specifier': 'storage.modifier'
+
+'"class"': 'keyword.control'
+'"struct"': 'keyword.control'
+'"typedef"': 'keyword.control'
+
+'"if"': 'keyword.control'
+'"else"': 'keyword.control'
+'"do"': 'keyword.control'
+'"for"': 'keyword.control'
+'"while"': 'keyword.control'
+'"break"': 'keyword.control'
+'"continue"': 'keyword.control'
+'"return"': 'keyword.control'
+'"switch"': 'keyword.control'
+'"case"': 'keyword.control'
+'"default"': 'keyword.control'
