@@ -12,9 +12,6 @@
 
 'new_expression > function_call > identifier': 'meta.class.instance.constructor'
 
-'import_specifier > identifier': 'variable.other.module'
-'import_clause > identifier': 'variable.other.module'
-
 'this_expression': 'constant.language.this'
 'number': 'constant.numeric.decimal'
 'string': 'string.quoted.single'
@@ -25,6 +22,9 @@
 'true': 'constant.language.boolean.true'
 'false': 'constant.language.boolean.false'
 'comment': 'comment.block'
+
+'type_identifier': 'support.type'
+'predefined_type': 'support.type'
 
 'ERROR': 'syntax-error'
 
@@ -37,6 +37,9 @@
 '"let"': 'storage.type.var'
 '"const"': 'storage.modifier'
 '"static"': 'storage.modifier'
+'"public"': 'storage.modifier'
+'"private"': 'storage.modifier'
+'readonly': 'storage.modifier'
 '"class"': 'storage.type.class'
 '"function"': 'storage.type.function'
 

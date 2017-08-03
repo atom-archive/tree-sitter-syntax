@@ -11,9 +11,9 @@
 '"map"': 'keyword.map.go'
 '"chan"': 'keyword.chan.go'
 
-'type_name': 'support.type'
-'field_name': 'variable.other.object.property'
-'package_name': 'entity.name.package.go'
+'type_identifier': 'support.type'
+'field_identifier': 'variable.other.object.property'
+'package_identifier': 'entity.name.package.go'
 
 '"if"': 'keyword.control.go'
 '"for"': 'keyword.control.go'
@@ -32,9 +32,9 @@
 'int_literal': 'constant.numeric.integer.go'
 'nil': 'constant.language.nil'
 
-'call_expression > variable_name:nth-child(0)': 'entity.name.function'
-'function_declaration > variable_name': 'entity.name.function'
+'call_expression > identifier:nth-child(0)': 'entity.name.function'
+'function_declaration > identifier': 'entity.name.function'
 
 # Experiment - show methods in a different color than top-level functions?
-'method_declaration > field_name': 'entity.name.function'
-'call_expression > selector_expression:nth-child(0) > field_name': 'entity.name.function'
+'method_declaration > field_identifier': 'entity.name.function'
+'call_expression > selector_expression:nth-child(0) > field_identifier': 'entity.name.function'

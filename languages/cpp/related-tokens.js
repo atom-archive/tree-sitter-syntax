@@ -17,7 +17,10 @@ function getVariableUsages(node, buffer, document) {
     if (!nextScope) {
       const parameterList = closest(scope, 'parameter_list')
       if (parameterList) {
-        nextScope = getNamedChild(closest(parameterList, 'function_definition'), 'compound_statement')
+        nextScope = getNamedChild(
+          closest(parameterList, ['function_definition', 'lambda_expression']),
+          'compound_statement'
+        )
       } else if (scope.parent) {
         nextScope = document.rootNode
       }
@@ -28,14 +31,31 @@ function getVariableUsages(node, buffer, document) {
     let variableDeclarationNode
 
     const {parent} = scope
-    if (parent && parent.type === 'function_definition') {
-      const parameterList = findFirstNamed(parent, 'parameter_list')
-      parameterList.namedChildren.forEach(parameterDeclaration => {
-        const parameterNameNode = findFirstNamed(parameterDeclaration, 'identifier')
-        if (getText(parameterNameNode, buffer) === variableName) {
-          variableDeclarationNode = parameterNameNode
+    if (parent) {
+      switch (parent.type) {
+        case 'function_definition':
+        case 'lambda_expression':
+          const parameterList = findFirstNamed(parent, 'parameter_list')
+          parameterList.namedChildren.forEach(parameterDeclaration => {
+            const parameterNameNode = findFirstNamed(parameterDeclaration, 'identifier')
+            if (parameterNameNode && getText(parameterNameNode, buffer) === variableName) {
+              variableDeclarationNode = parameterNameNode
+            }
+          })
+          break
+
+        case 'for_range_loop': {
+          const rangeDeclaration = findFirstNamed(parent, 'for_range_declaration')
+          rangeDeclaration.namedChildren.forEach(declarator => {
+            const variableNameNode = findFirstNamed(declarator, 'identifier', true)
+            if (variableNameNode && getText(variableNameNode, buffer) === variableName) {
+              variableDeclarationNode = variableNameNode
+              return
+            }
+          })
+          break
         }
-      })
+      }
     }
 
     if (!variableDeclarationNode) {

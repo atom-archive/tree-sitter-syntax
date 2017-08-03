@@ -8,13 +8,13 @@
 # '"#define"': 'keyword.control.directive.define'
 # '"#include"': 'keyword.control.directive.include'
 
-'call_expression > variable_name:nth-child(0)': 'entity.name.function'
-'call_expression > field_expression > field_name:nth-child(2)': 'entity.name.function'
+'call_expression > identifier:nth-child(0)': 'entity.name.function'
+'call_expression > field_expression > field_identifier:nth-child(2)': 'entity.name.function'
 
-'function_declarator > variable_name': 'entity.name.function'
+'function_declarator > identifier': 'entity.name.function'
 
-'field_name': 'variable.other.member'
-'type_name': 'support.type'
+'field_identifier': 'variable.other.member'
+'type_identifier': 'support.type'
 
 'string_literal': 'string.quoted.double'
 'system_lib_string': 'string.quoted.other.lt-gt.include'

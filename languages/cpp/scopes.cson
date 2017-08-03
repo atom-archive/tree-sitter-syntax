@@ -1,3 +1,5 @@
+'translation_unit': 'source.cpp'
+
 'comment': 'comment.block.js'
 
 # 'ERROR': 'syntax-error'
@@ -11,36 +13,20 @@
 'preproc_define': 'keyword.control.directive.define.c'
 'preproc_include': 'keyword.control.directive.include.c'
 
-'call_expression > identifier:nth-child(0)': 'entity.name.function'
-'call_expression > template_call:nth-child(0) > identifier:nth-child(0)': 'entity.name.function'
-'call_expression > template_call:nth-child(0) > scoped_identifier:nth-child(0) > identifier:nth-child(2)': 'entity.name.function'
-'call_expression > scoped_identifier > identifier:nth-child(2)': 'entity.name.function'
-'call_expression > field_expression > identifier:nth-child(2)': 'entity.name.function'
-
+'call_expression > identifier': 'entity.name.function'
+'call_expression > field_expression > field_identifier': 'entity.name.function'
+'call_expression > scoped_identifier > identifier': 'entity.name.function'
+'template_function > identifier': 'entity.name.function'
+'template_function > scoped_identifier > identifier': 'entity.name.function'
 'function_declarator > identifier': 'entity.name.function'
-'function_declarator > scoped_identifier > identifier:nth-child(2)': 'entity.name.function'
+'function_declarator > field_identifier': 'entity.name.function'
 
-'field_expression > identifier:nth-child(2)': 'variable.other.member'
+'field_identifier': 'variable.other.member'
 
-# TODO: expose the `declarator` rule and refer to it directly
-'member_declaration > identifier:nth-child(1)': 'variable.other.member'
-'member_declaration > *:nth-child(1) > identifier': 'variable.other.member'
-'member_declaration > identifier:nth-child(1)': 'variable.other.member'
-'member_declaration > *:nth-child(1) > identifier': 'variable.other.member'
-
-'member_initializer > identifier:nth-child(0)': 'variable.other.member'
-
-'class_specifier > identifier:nth-child(1)': 'entity.name.type'
-'base_class_clause > identifier': 'entity.name.type'
-'base_class_clause > scoped_identifier > identifier:nth-child(2)': 'entity.name.type'
-
-# TODO: expose the `type` rule and refer to it directly
-'declaration > identifier:nth-child(0)': 'storage.type.c'
-'member_declaration > identifier:nth-child(0)': 'storage.type.c'
-'parameter_declaration > identifier:nth-child(0)': 'storage.type.c'
-'function_definition > identifier:nth-child(0)': 'storage.type.c'
-'scoped_identifier > identifier:nth-child(0)': 'storage.type.c'
-'type_name > identifier': 'storage.type.c'
+'type_identifier': 'support.type'
+'scoped_identifier > identifier': 'support.type'
+'scoped_field_identifier > identifier': 'support.type'
+'scoped_type_identifier > identifier': 'support.type'
 
 'string_literal': 'string.quoted.double.c'
 'system_lib_string': 'string.quoted.other.lt-gt.include.c'
@@ -60,15 +46,22 @@
 '"protected"': 'storage.modifier'
 
 'auto': 'storage.type'
+'"unsigned"': 'storage.modifier'
 
-'"if"': 'keyword.control.c'
-'"else"': 'keyword.control.c'
-'"do"': 'keyword.control.c'
-'"for"': 'keyword.control.c'
-'"while"': 'keyword.control.c'
-'"break"': 'keyword.control.c'
-'"continue"': 'keyword.control.c'
-'"return"': 'keyword.control.c'
-'"switch"': 'keyword.control.c'
-'"case"': 'keyword.control.c'
-'"default"': 'keyword.control.c'
+'"if"': 'keyword.control'
+'"else"': 'keyword.control'
+'"do"': 'keyword.control'
+'"for"': 'keyword.control'
+'"while"': 'keyword.control'
+'"break"': 'keyword.control'
+'"continue"': 'keyword.control'
+'"return"': 'keyword.control'
+'"switch"': 'keyword.control'
+'"case"': 'keyword.control'
+'"default"': 'keyword.control'
+
+'"*"': 'keyword.operator.c'
+'"&"': 'keyword.operator.c'
+'"&&"': 'keyword.operator.c'
+'"||"': 'keyword.operator.c'
+'"|"': 'keyword.operator.c'
