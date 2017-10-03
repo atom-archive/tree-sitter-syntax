@@ -32,7 +32,7 @@ function getVariableUsages(node, buffer, document) {
       const parameterList = findFirstNamed(parent, 'parameter_list')
       parameterList.namedChildren.forEach(parameterDeclaration => {
         const parameterNameNode = findFirstNamed(parameterDeclaration, 'identifier')
-        if (getText(parameterNameNode, buffer) === variableName) {
+        if (parameterNameNode && getText(parameterNameNode, buffer) === variableName) {
           variableDeclarationNode = parameterNameNode
         }
       })
