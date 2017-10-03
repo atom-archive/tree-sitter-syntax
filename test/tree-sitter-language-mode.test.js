@@ -1,15 +1,93 @@
-const {TextBuffer} = require('atom');
+const {TextBuffer, TextEditor} = require('atom');
 const {assert} = require('chai');
 const dedent = require('dedent');
 const {Document} = require('tree-sitter');
 const javascriptLanguage = require('tree-sitter-javascript');
 const point = require('../lib/point-helpers');
 const InputAdaptor = require('../lib/input-adapter');
-const TreeSitterDecorationLayer = require('../lib/tree-sitter-decoration-layer');
+const TreeSitterLanguageMode = require('../lib/tree-sitter-language-mode');
 const ScopeMap = require('../lib/scope-map');
 
-describe('TreeSitterDecorationLayer', function () {
-  describe('iterator', function () {
+describe('TreeSitterLanguageMode', () => {
+  describe('folding', () => {
+    let buffer, editor, document, languageMode;
+
+    beforeEach(() => {
+      buffer = new TextBuffer();
+
+      document = new Document()
+        .setLanguage(javascriptLanguage)
+        .setInput(new InputAdaptor(buffer));
+
+      const foldConfig = {
+        delimiters: [
+          ['{', '}'],
+          ['(', ')'],
+          ['[', ']']
+        ],
+        tokens: [
+          ['comment', 2, 2],
+          ['template_string', 1, 1]
+        ]
+      };
+
+      languageMode = new TreeSitterLanguageMode({
+        buffer,
+        document,
+        foldConfig,
+        scopeMap: new ScopeMap({})
+      });
+
+      editor = new TextEditor({buffer, tokenizedBuffer: languageMode});
+      editor.displayLayer.reset({foldCharacter: '…'});
+    });
+
+    it('can fold a brace-delimited block', () => {
+      buffer.setText(dedent`
+        module.exports =
+        class A {
+          getB() {
+            return this.b;
+          }
+        };
+      `);
+
+      document.parse();
+
+      assert.notOk(languageMode.isFoldableAtRow(0));
+      assert.ok(languageMode.isFoldableAtRow(1));
+      assert.ok(languageMode.isFoldableAtRow(2));
+      assert.notOk(languageMode.isFoldableAtRow(3));
+
+      editor.foldBufferRow(2);
+      assert.equal(editor.lineTextForScreenRow(2), '  getB() {…}');
+    })
+
+    it('can fold a multiline comment', () => {
+      buffer.setText(dedent`
+        a();
+
+        /*
+         * this is a comment.
+         * it is really important.
+         */
+
+        b();
+      `);
+
+      document.parse();
+
+      assert.notOk(languageMode.isFoldableAtRow(1));
+      assert.ok(languageMode.isFoldableAtRow(2));
+      assert.notOk(languageMode.isFoldableAtRow(3));
+
+      editor.foldBufferRow(2);
+      assert.equal(editor.lineTextForScreenRow(2), '/*…*/');
+      assert.notOk(languageMode.isFoldableAtRow(3));
+    })
+  });
+
+  describe('highlighting', function () {
     it('reports a tag boundary at relevant nodes in the tree', function () {
       const buffer = new TextBuffer(dedent`
         function foo (a) { return a + 1; }
@@ -35,7 +113,7 @@ describe('TreeSitterDecorationLayer', function () {
         .setInput(new InputAdaptor(buffer))
         .setLanguage(javascriptLanguage)
 
-      const layer = new TreeSitterDecorationLayer({buffer, document, scopeMap})
+      const layer = new TreeSitterLanguageMode({buffer, document, scopeMap})
       const iterator = layer.buildIterator()
 
       assert.deepEqual(getTokens(buffer, iterator)[0], [
