@@ -36,12 +36,14 @@ function getVariableUsages(node, buffer, document) {
         case 'function_definition':
         case 'lambda_expression':
           const parameterList = findFirstNamed(parent, 'parameter_list')
-          parameterList.namedChildren.forEach(parameterDeclaration => {
-            const parameterNameNode = findFirstNamed(parameterDeclaration, 'identifier')
-            if (parameterNameNode && getText(parameterNameNode, buffer) === variableName) {
-              variableDeclarationNode = parameterNameNode
-            }
-          })
+          if (parameterList) {
+            parameterList.namedChildren.forEach(parameterDeclaration => {
+              const parameterNameNode = findFirstNamed(parameterDeclaration, 'identifier')
+              if (parameterNameNode && getText(parameterNameNode, buffer) === variableName) {
+                variableDeclarationNode = parameterNameNode
+              }
+            })
+          }
           break
 
         case 'for_range_loop': {

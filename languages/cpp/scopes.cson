@@ -20,13 +20,11 @@
 'template_function > scoped_identifier > identifier': 'entity.name.function'
 'function_declarator > identifier': 'entity.name.function'
 'function_declarator > field_identifier': 'entity.name.function'
+'function_declarator > scoped_identifier > identifier': 'entity.name.function'
 
 'field_identifier': 'variable.other.member'
 
 'type_identifier': 'support.type'
-'scoped_identifier > identifier': 'support.type'
-'scoped_field_identifier > identifier': 'support.type'
-'scoped_type_identifier > identifier': 'support.type'
 
 'string_literal': 'string.quoted.double.c'
 'system_lib_string': 'string.quoted.other.lt-gt.include.c'
