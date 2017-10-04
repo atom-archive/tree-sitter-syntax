@@ -8,6 +8,7 @@
 '"#if"': 'keyword.control.directive'
 '"#ifdef"': 'keyword.control.directive'
 '"#ifndef"': 'keyword.control.directive'
+'"#else"': 'keyword.control.directive'
 '"#endif"': 'keyword.control.directive'
 '"#define"': 'keyword.control.directive.define'
 '"#include"': 'keyword.control.directive.include'
@@ -18,12 +19,18 @@
 'function_declarator > identifier': 'entity.name.function'
 
 'field_identifier': 'variable.other.member'
+
 'type_identifier': 'support.type'
+'primitive_type': 'support.type'
+'"unsigned"': 'support.type'
 
 'string_literal': 'string.quoted.double'
 'system_lib_string': 'string.quoted.other.lt-gt.include'
 
 'number_literal': 'constant.numeric.decimal'
+'null': 'constant.language.null'
+'true': 'constant.language.boolean'
+'false': 'constant.language.boolean'
 
 'auto': 'storage.modifier'
 '"static"': 'storage.modifier'

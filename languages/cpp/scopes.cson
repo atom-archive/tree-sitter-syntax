@@ -1,10 +1,17 @@
 'translation_unit': 'source.cpp'
 
-'comment': 'comment.block.js'
+'comment': 'comment.block'
 
 # 'ERROR': 'syntax-error'
 
-'"static"': 'storage.modifier.c'
+'"#if"': 'keyword.control.directive'
+'"#ifdef"': 'keyword.control.directive'
+'"#ifndef"': 'keyword.control.directive'
+'"#else"': 'keyword.control.directive'
+'"#endif"': 'keyword.control.directive'
+'"#define"': 'keyword.control.directive'
+'"#include"': 'keyword.control.directive'
+
 '"static"': 'storage.modifier.c'
 
 'preproc_function_def > identifier:nth-child(1)': 'entity.name.function.preprocessor.c'
@@ -21,20 +28,28 @@
 'function_declarator > identifier': 'entity.name.function'
 'function_declarator > field_identifier': 'entity.name.function'
 'function_declarator > scoped_identifier > identifier': 'entity.name.function'
+'destructor_name > identifier': 'entity.name.function'
 
 'field_identifier': 'variable.other.member'
 
 'type_identifier': 'support.type'
+'primitive_type': 'support.type'
+'"unsigned"': 'support.type'
 
 'string_literal': 'string.quoted.double.c'
 'system_lib_string': 'string.quoted.other.lt-gt.include.c'
 
 'number_literal': 'constant.numeric.decimal'
+'null': 'constant.language.null'
+'nullptr': 'constant.language.null'
+'true': 'constant.language.boolean'
+'false': 'constant.language.boolean'
 
 '"namespace"': 'keyword.control'
 '"using"': 'keyword.control'
 '"class"': 'keyword.control'
 '"struct"': 'keyword.control'
+'"template"': 'keyword.control'
 
 '"static"': 'storage.modifier'
 '"inline"': 'storage.modifier'
