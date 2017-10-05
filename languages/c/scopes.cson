@@ -40,6 +40,8 @@
 
 '"class"': 'keyword.control'
 '"struct"': 'keyword.control'
+'"enum"': 'keyword.control'
+'"union"': 'keyword.control'
 '"typedef"': 'keyword.control'
 
 '"if"': 'keyword.control'

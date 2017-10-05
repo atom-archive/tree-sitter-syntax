@@ -49,6 +49,8 @@
 '"using"': 'keyword.control'
 '"class"': 'keyword.control'
 '"struct"': 'keyword.control'
+'"enum"': 'keyword.control'
+'"union"': 'keyword.control'
 '"template"': 'keyword.control'
 
 '"static"': 'storage.modifier'
