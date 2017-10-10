@@ -8,14 +8,13 @@
 'call_expression > identifier': 'entity.name.function'
 
 'method_definition > property_identifier': 'entity.name.function'
-'call_expression > member_expression > property_identifier:nth-child(2)': 'entity.name.function'
+'call_expression > member_expression > property_identifier': 'entity.name.function'
 
 'new_expression > call_expression > identifier': 'meta.class.instance.constructor'
 
 'import_specifier > identifier': 'variable.other.module'
 'import_clause > identifier': 'variable.other.module'
 
-'this_expression': 'constant.language.this'
 'number': 'constant.numeric.decimal'
 'string': 'string.quoted.single'
 'regex': 'string.regexp'

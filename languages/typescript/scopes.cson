@@ -1,18 +1,17 @@
 'program': 'source.js'
 
-'class > identifier': 'entity.name.type.class'
+'class > identifier': 'support.type'
 
 'property_identifier': 'variable.other.object.property'
 
 'function > identifier': 'entity.name.function'
-'function_call > identifier': 'entity.name.function'
+'call_expression > identifier': 'entity.name.function'
 
 'method_definition > property_identifier': 'entity.name.function'
-'function_call > member_access > property_identifier:nth-child(2)': 'entity.name.function'
+'call_expression > member_expression > property_identifier:nth-child(2)': 'entity.name.function'
 
-'new_expression > function_call > identifier': 'meta.class.instance.constructor'
+'new_expression > call_expression > identifier': 'meta.class.instance.constructor'
 
-'this_expression': 'constant.language.this'
 'number': 'constant.numeric.decimal'
 'string': 'string.quoted.single'
 'regex': 'string.regexp'

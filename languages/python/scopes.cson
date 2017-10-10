@@ -16,6 +16,8 @@
 'true': 'constant.language.python'
 'false': 'constant.language.python'
 
+'type > identifier': 'support.type'
+
 '"class"': 'storage.type.class.python'
 '"def"': 'storage.type.function.python'
 '"lambda"': 'storage.type.function.inline.python'
