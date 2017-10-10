@@ -17,10 +17,8 @@ function getVariableUsages(node, buffer, document) {
     if (!nextScope) {
       const parameterList = closest(scope, 'parameter_list')
       if (parameterList) {
-        nextScope = getNamedChild(
-          closest(parameterList, ['function_definition', 'lambda_expression']),
-          'compound_statement'
-        )
+        const functionNode = closest(parameterList, ['function_definition', 'lambda_expression']);
+        if (functionNode) nextScope = getNamedChild(functionNode, 'compound_statement')
       } else if (scope.parent) {
         nextScope = document.rootNode
       }

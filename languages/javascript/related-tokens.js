@@ -169,6 +169,7 @@ function eachDeclaredVariable(statement, callback) {
                 const patternChild = patternChildren[j];
                 switch (patternChild.type) {
                   case 'identifier':
+                  case 'shorthand_property_identifier':
                     if (callback(patternChild)) return;
                     break;
 
