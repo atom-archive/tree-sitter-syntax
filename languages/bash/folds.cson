@@ -1,9 +1,0 @@
-delimiters: [
-  ['if', 'fi', {afterType: 'then'}]
-  ['do', 'done']
-  ['case', 'esac']
-]
-
-tokens: [
-  ['comment', 2, 2]
-]

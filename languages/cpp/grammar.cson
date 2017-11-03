@@ -1,0 +1,98 @@
+folds:
+  delimiters: [
+    ['{', '}']
+    ['(', ')']
+    ['[', ']']
+  ]
+
+  tokens: [
+    ['comment', 2, 2],
+    ['preproc_arg', 0, 0]
+  ]
+
+comments:
+  start: '// '
+
+scopes:
+  'translation_unit': 'source.cpp'
+
+  'comment': 'comment.block'
+
+  # 'ERROR': 'syntax-error'
+
+  '"#if"': 'keyword.control.directive'
+  '"#ifdef"': 'keyword.control.directive'
+  '"#ifndef"': 'keyword.control.directive'
+  '"#else"': 'keyword.control.directive'
+  '"#endif"': 'keyword.control.directive'
+  '"#define"': 'keyword.control.directive'
+  '"#include"': 'keyword.control.directive'
+
+  '"static"': 'storage.modifier.c'
+
+  'preproc_function_def > identifier:nth-child(1)': 'entity.name.function.preprocessor.c'
+  'preproc_arg': 'meta.preprocessor.macro.c'
+
+  'preproc_define': 'keyword.control.directive.define.c'
+  'preproc_include': 'keyword.control.directive.include.c'
+
+  'call_expression > identifier': 'entity.name.function'
+  'call_expression > field_expression > field_identifier': 'entity.name.function'
+  'call_expression > scoped_identifier > identifier': 'entity.name.function'
+  'template_function > identifier': 'entity.name.function'
+  'template_function > scoped_identifier > identifier': 'entity.name.function'
+  'function_declarator > identifier': 'entity.name.function'
+  'function_declarator > field_identifier': 'entity.name.function'
+  'function_declarator > scoped_identifier > identifier': 'entity.name.function'
+  'destructor_name > identifier': 'entity.name.function'
+
+  'field_identifier': 'variable.other.member'
+
+  'type_identifier': 'support.type'
+  'primitive_type': 'support.type'
+  '"unsigned"': 'support.type'
+
+  'string_literal': 'string.quoted.double.c'
+  'system_lib_string': 'string.quoted.other.lt-gt.include.c'
+
+  'number_literal': 'constant.numeric.decimal'
+  'null': 'constant.language.null'
+  'nullptr': 'constant.language.null'
+  'true': 'constant.language.boolean'
+  'false': 'constant.language.boolean'
+
+  '"namespace"': 'keyword.control'
+  '"using"': 'keyword.control'
+  '"class"': 'keyword.control'
+  '"struct"': 'keyword.control'
+  '"enum"': 'keyword.control'
+  '"union"': 'keyword.control'
+  '"template"': 'keyword.control'
+
+  '"static"': 'storage.modifier'
+  '"inline"': 'storage.modifier'
+  '"const"': 'storage.modifier'
+  '"public"': 'storage.modifier'
+  '"private"': 'storage.modifier'
+  '"protected"': 'storage.modifier'
+
+  'auto': 'storage.type'
+  '"unsigned"': 'storage.modifier'
+
+  '"if"': 'keyword.control'
+  '"else"': 'keyword.control'
+  '"do"': 'keyword.control'
+  '"for"': 'keyword.control'
+  '"while"': 'keyword.control'
+  '"break"': 'keyword.control'
+  '"continue"': 'keyword.control'
+  '"return"': 'keyword.control'
+  '"switch"': 'keyword.control'
+  '"case"': 'keyword.control'
+  '"default"': 'keyword.control'
+
+  '"*"': 'keyword.operator.c'
+  '"&"': 'keyword.operator.c'
+  '"&&"': 'keyword.operator.c'
+  '"||"': 'keyword.operator.c'
+  '"|"': 'keyword.operator.c'

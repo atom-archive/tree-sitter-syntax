@@ -1,0 +1,55 @@
+folds: {}
+
+comments:
+  start: '# '
+
+scopes:
+  'module': 'source.python'
+
+  'comment': 'comment.line.python'
+  'string': 'string.quoted.single.js'
+
+  'class_definition > identifier': 'entity.name.type.class.python'
+  'function_definition > identifier': 'entity.name.function.python'
+  'call > identifier:nth-child(0)': 'entity.name.function.python'
+  'call > attribute > identifier:nth-child(2)': 'entity.name.function.python'
+  'attribute > identifier:nth-child(2)': 'variable.other.object.property.python'
+  'decorator': 'entity.name.function.decorator.python'
+
+  'none': 'constant.language.python'
+  'true': 'constant.language.python'
+  'false': 'constant.language.python'
+
+  'type > identifier': 'support.type'
+
+  '"class"': 'storage.type.class.python'
+  '"def"': 'storage.type.function.python'
+  '"lambda"': 'storage.type.function.inline.python'
+
+  '"if"': 'keyword.control.python'
+  '"else"': 'keyword.control.python'
+  '"elif"': 'keyword.control.python'
+  '"while"': 'keyword.control.python'
+  '"for"': 'keyword.control.python'
+  '"return"': 'keyword.control.python'
+  '"break"': 'keyword.control.python'
+  '"continue"': 'keyword.control.python'
+  '"raise"': 'keyword.control.python'
+  '"try"': 'keyword.control.python'
+  '"except"': 'keyword.control.python'
+  '"with"': 'keyword.control.python'
+  '"as"': 'keyword.control.python'
+  '"finally"': 'keyword.control.python'
+  '"import"': 'keyword.control.python'
+  '"from"': 'keyword.control.python'
+
+  '"+"': 'keyword.operator.js'
+  '"-"': 'keyword.operator.js'
+  '"*"': 'keyword.operator.js'
+  '"/"': 'keyword.operator.js'
+  '"%"': 'keyword.operator.js'
+  '"in"': 'keyword.operator.in.python'
+  '"and"': 'keyword.operator.logical.python'
+  '"or"': 'keyword.operator.logical.python'
+  '"not"': 'keyword.operator.logical.python'
+  '"is"': 'keyword.operator.logical.python'

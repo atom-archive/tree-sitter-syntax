@@ -1,0 +1,41 @@
+folds:
+  delimiters: [
+    ['if', 'fi', {afterType: 'then'}]
+    ['do', 'done']
+    ['case', 'esac']
+  ]
+
+  tokens: [
+    ['comment', 2, 2]
+  ]
+
+comments:
+  '# '
+
+scopes:
+  'program': 'source.shell'
+
+  'comment': 'comment.block'
+
+  'string': 'string'
+  'raw_string': 'string'
+  'heredoc': 'string'
+
+  'command_name': 'entity.name.function'
+
+  'variable_name': 'variable.other.member'
+
+  '"if"': 'keyword.control'
+  '"fi"': 'keyword.control'
+  '"then"': 'keyword.control'
+  '"else"': 'keyword.control'
+  '"for"': 'keyword.control'
+  '"do"': 'keyword.control'
+  '"done"': 'keyword.control'
+  '"case"': 'keyword.control'
+  '"esac"': 'keyword.control'
+  '"in"': 'keyword.control'
+  '"while"': 'keyword.control'
+  '"until"': 'keyword.control'
+
+  '"$"': 'punctuation.section.embedded'

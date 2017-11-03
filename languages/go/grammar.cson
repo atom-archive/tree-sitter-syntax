@@ -1,0 +1,56 @@
+comments:
+  start: '// '
+
+folds:
+  delimiters: [
+    ['{', '}']
+    ['(', ')']
+    ['[', ']']
+  ]
+
+  tokens: [
+    ['comment', 2, 2]
+    ['raw_string_literal', 1, 1]
+  ]
+
+scopes:
+  'ERROR': 'syntax-error'
+  'comment': 'comment.block.js'
+
+  '"var"': 'keyword.import.go'
+  '"type"': 'keyword.type.go'
+  '"func"': 'keyword.function.go'
+  '"const"': 'keyword.import.go'
+  '"struct"': 'keyword.struct.go'
+  '"import"': 'keyword.import.go'
+  '"package"': 'keyword.package.go'
+  '"map"': 'keyword.map.go'
+  '"chan"': 'keyword.chan.go'
+
+  'type_identifier': 'support.type'
+  'field_identifier': 'variable.other.object.property'
+  'package_identifier': 'entity.name.package.go'
+
+  '"if"': 'keyword.control.go'
+  '"for"': 'keyword.control.go'
+  '"else"': 'keyword.control.go'
+  '"case"': 'keyword.control.go'
+  '"break"': 'keyword.control.go'
+  '"switch"': 'keyword.control.go'
+  '"select"': 'keyword.control.go'
+  '"return"': 'keyword.control.go'
+  '"default"': 'keyword.control.go'
+  '"continue"': 'keyword.control.go'
+
+  'interpreted_string_literal': 'string.quoted.double.go'
+  'raw_string_literal': 'string.quoted.double.go'
+  'rune_literal': 'constant.other.rune.go'
+  'int_literal': 'constant.numeric.integer.go'
+  'nil': 'constant.language.nil'
+
+  'call_expression > identifier:nth-child(0)': 'entity.name.function'
+  'function_declaration > identifier': 'entity.name.function'
+
+  # Experiment - show methods in a different color than top-level functions?
+  'method_declaration > field_identifier': 'entity.name.function'
+  'call_expression > selector_expression:nth-child(0) > field_identifier': 'entity.name.function'

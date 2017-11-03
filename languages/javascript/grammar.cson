@@ -1,0 +1,99 @@
+folds:
+  delimiters: [
+    ['{', '}']
+    ['(', ')']
+    ['[', ']'],
+    ['jsx_opening_element', 'jsx_closing_element'],
+    ['<', '>', {afterChildCount: 1}]
+  ],
+
+  tokens: [
+    ['comment', 2, 2]
+    ['template_string', 1, 1]
+  ]
+
+comments:
+  start: '// '
+
+scopes:
+  'program': 'source.js'
+
+  'class > identifier': 'entity.name.type.class'
+
+  'property_identifier': 'variable.other.object.property'
+
+  'function > identifier': 'entity.name.function'
+  'call_expression > identifier': 'entity.name.function'
+
+  'method_definition > property_identifier': 'entity.name.function'
+  'call_expression > member_expression > property_identifier': 'entity.name.function'
+
+  'new_expression > call_expression > identifier': 'meta.class.instance.constructor'
+
+  'import_specifier > identifier': 'variable.other.module'
+  'import_clause > identifier': 'variable.other.module'
+
+  'number': 'constant.numeric.decimal'
+  'string': 'string.quoted.single'
+  'regex': 'string.regexp'
+  'template_string': 'string.quoted.template'
+  'undefined': 'constant.language'
+  'null': 'constant.language.null'
+  'true': 'constant.language.boolean.true'
+  'false': 'constant.language.boolean.false'
+  'comment': 'comment.block'
+
+  '"("': 'punctuation.definition.parameters.begin.bracket.round'
+  '")"': 'punctuation.definition.parameters.end.bracket.round'
+  '"{"': 'punctuation.definition.function.body.begin.bracket.curly'
+  '"}"': 'punctuation.definition.function.body.end.bracket.curly'
+
+  '"var"': 'storage.type.var'
+  '"let"': 'storage.type.var'
+  '"const"': 'storage.modifier'
+  '"static"': 'storage.modifier'
+  '"class"': 'storage.type.class'
+  '"function"': 'storage.type.function'
+
+  '"+"': 'keyword.operator'
+  '"-"': 'keyword.operator'
+  '"*"': 'keyword.operator'
+  '"/"': 'keyword.operator'
+  '"in"': 'keyword.operator.in'
+  '"instanceof"': 'keyword.operator.instanceof'
+  '"of"': 'keyword.operator.of'
+  '"new"': 'keyword.operator.new'
+  '"typeof"': 'keyword.operator.typeof'
+
+  '"get"': 'keyword.operator.setter'
+  '"set"': 'keyword.operator.setter'
+
+  '"."': 'meta.delimiter.property.period'
+  '","': 'meta.delimiter.object.comma'
+
+  '"if"': 'keyword.control'
+  '"do"': 'keyword.control'
+  '"else"': 'keyword.control'
+  '"while"': 'keyword.control'
+  '"for"': 'keyword.control'
+  '"return"': 'keyword.control'
+  '"break"': 'keyword.control'
+  '"continue"': 'keyword.control'
+  '"throw"': 'keyword.control'
+  '"try"': 'keyword.control'
+  '"catch"': 'keyword.control'
+  '"finally"': 'keyword.control'
+  '"switch"': 'keyword.control'
+  '"case"': 'keyword.control'
+  '"default"': 'keyword.control'
+  '"export"': 'keyword.control'
+  '"import"': 'keyword.control'
+  '"from"': 'keyword.control'
+  '"yield"': 'keyword.control'
+  '"async"': 'keyword.control'
+  '"await"': 'keyword.control'
+
+  'jsx_attribute': 'entity.other.attribute-name'
+  'jsx_opening_element > identifier': 'entity.name.tag'
+  'jsx_closing_element > identifier': 'entity.name.tag'
+  'jsx_self_closing_element > identifier': 'entity.name.tag'

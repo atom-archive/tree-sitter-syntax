@@ -1,0 +1,73 @@
+folds:
+  delimiters: [
+    ['{', '}']
+    ['(', ')']
+    ['[', ']']
+  ]
+
+  tokens: [
+    ['comment', 2, 2],
+    ['preproc_arg', 0, 0]
+  ]
+
+comments:
+  '// '
+
+scopes:
+  'comment': 'comment.block.js'
+
+  # 'ERROR': 'syntax-error'
+
+  'preproc_function_def > identifier:nth-child(1)': 'entity.name.function.preprocessor'
+  'preproc_arg': 'meta.preprocessor.macro'
+
+  '"#if"': 'keyword.control.directive'
+  '"#ifdef"': 'keyword.control.directive'
+  '"#ifndef"': 'keyword.control.directive'
+  '"#else"': 'keyword.control.directive'
+  '"#endif"': 'keyword.control.directive'
+  '"#define"': 'keyword.control.directive.define'
+  '"#include"': 'keyword.control.directive.include'
+
+  'call_expression > identifier:nth-child(0)': 'entity.name.function'
+  'call_expression > field_expression > field_identifier:nth-child(2)': 'entity.name.function'
+
+  'function_declarator > identifier': 'entity.name.function'
+
+  'field_identifier': 'variable.other.member'
+
+  'type_identifier': 'support.type'
+  'primitive_type': 'support.type'
+  '"unsigned"': 'support.type'
+
+  'string_literal': 'string.quoted.double'
+  'system_lib_string': 'string.quoted.other.lt-gt.include'
+
+  'number_literal': 'constant.numeric.decimal'
+  'null': 'constant.language.null'
+  'true': 'constant.language.boolean'
+  'false': 'constant.language.boolean'
+
+  'auto': 'storage.modifier'
+  '"static"': 'storage.modifier'
+  '"inline"': 'storage.modifier'
+  '"const"': 'storage.modifier'
+  'function_specifier': 'storage.modifier'
+
+  '"class"': 'keyword.control'
+  '"struct"': 'keyword.control'
+  '"enum"': 'keyword.control'
+  '"union"': 'keyword.control'
+  '"typedef"': 'keyword.control'
+
+  '"if"': 'keyword.control'
+  '"else"': 'keyword.control'
+  '"do"': 'keyword.control'
+  '"for"': 'keyword.control'
+  '"while"': 'keyword.control'
+  '"break"': 'keyword.control'
+  '"continue"': 'keyword.control'
+  '"return"': 'keyword.control'
+  '"switch"': 'keyword.control'
+  '"case"': 'keyword.control'
+  '"default"': 'keyword.control'
