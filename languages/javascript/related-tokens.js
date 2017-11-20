@@ -123,7 +123,7 @@ function getVariableUsages(currentNode, buffer) {
     if (declaredVariable) {
       results.push({node: declaredVariable, highlightClass: 'variable-definition'})
 
-      const identifiers = findAll(declaredVariableScope, 'identifier');
+      const identifiers = findAll(declaredVariableScope, ['identifier', 'shorthand_property_identifier']);
       for (let i = 0, n = identifiers.length; i < n; i++) {
         const identifier = identifiers[i];
         if (identifier.id !== declaredVariable.id) {
