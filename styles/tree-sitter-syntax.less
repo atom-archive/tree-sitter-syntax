@@ -1,3 +1,8 @@
+@token-definition-border-dark: white;
+@related-token-background-dark: rgba(255, 255, 255, 0.15);
+@token-definition-border-light: black;
+@related-token-background-light: #EEE;
+
 .syntax--syntax-error {
   border-bottom-width: 1px;
   border-bottom-style: dotted;
@@ -8,10 +13,28 @@
 .matching-tag > .region {
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  border-bottom-color: black;
-  background-color: #EEE;
 }
 
-.variable-usage > .region {
-  background-color: #EEE;
+.theme-one-dark-syntax, .theme-atom-dark-syntax {
+  .variable-definition > .region,
+  .matching-tag > .region {
+    border-bottom-color: @token-definition-border-dark;
+    background-color: @related-token-background-dark;
+  }
+
+  .variable-usage > .region {
+    background-color: @related-token-background-dark;
+  }
+}
+
+.theme-one-light-syntax, .theme-atom-light-syntax {
+  .variable-definition > .region,
+  .matching-tag > .region {
+    border-bottom-color: @token-definition-border-light;
+    background-color: @related-token-background-light;
+  }
+
+  .variable-usage > .region {
+    background-color: @related-token-background-light;
+  }
 }
