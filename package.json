@@ -45,5 +45,13 @@
       },
       "default": []
     }
+  },
+  "providedServices": {
+    "tree-sitter-syntax": {
+      "description": "Notifies consumers when new markers are made",
+      "versions": {
+        "0.0.0": "provideTreeSitterSyntaxBeta"
+      }
+    }
   }
 }
