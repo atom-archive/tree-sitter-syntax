@@ -1,6 +1,0 @@
-'atom-text-editor:not([mini])':
-  'ctrl-alt-up': 'tree-sitter-syntax:select-up'
-  'ctrl-alt-down': 'tree-sitter-syntax:select-down'
-  'ctrl-alt-left': 'tree-sitter-syntax:select-left'
-  'ctrl-alt-right': 'tree-sitter-syntax:select-right'
-  'ctrl-alt-t': 'tree-sitter-syntax:print-tree'
