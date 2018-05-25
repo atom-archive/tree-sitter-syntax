@@ -1,14 +1,14 @@
 const {closest, findAll, getText, getNamedChild, findFirstNamed} = require('../../lib/node-helpers');
 
 module.exports =
-function(node, buffer, document) {
+function(node, buffer, rootNode) {
   switch (node.type) {
     case 'identifier':
-      return getVariableUsages(node, buffer, document)
+      return getVariableUsages(node, buffer, rootNode)
   }
 }
 
-function getVariableUsages(node, buffer, document) {
+function getVariableUsages(node, buffer, rootNode) {
   const variableName = getText(node, buffer)
   let scope = node
 
@@ -19,11 +19,11 @@ function getVariableUsages(node, buffer, document) {
       if (parameterList) {
         nextScope = getNamedChild(closest(parameterList, 'function_definition'), 'compound_statement')
       } else if (scope.parent) {
-        nextScope = document.rootNode
+        nextScope = rootNode
       }
     }
     scope = nextScope
-    if (!scope) break
+    if (!scope || nodeIsBig(scope)) break
 
     let variableDeclarationNode
 

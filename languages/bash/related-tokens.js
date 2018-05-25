@@ -1,10 +1,10 @@
 const {closest, findAll, getText, getChild} = require('../../lib/node-helpers');
 
 module.exports =
-function(node, buffer, document) {
+function(node, buffer, rootNode) {
   switch (node.type) {
     case 'variable_name': {
-      return getVariableUsages(node, buffer, document)
+      return getVariableUsages(node, buffer, rootNode)
     }
 
     case 'if':
@@ -37,12 +37,12 @@ function(node, buffer, document) {
   }
 }
 
-function getVariableUsages(node, buffer, document) {
+function getVariableUsages(node, buffer, rootNode) {
   const result = []
 
   let foundFirstAssignment = false;
   const variableName = getText(node, buffer);
-  const variableNodes = findAll(document.rootNode, 'variable_name');
+  const variableNodes = findAll(rootNode, 'variable_name');
 
   for (let i = 0, n = variableNodes.length; i < n; i++) {
     const variableNode = variableNodes[i];

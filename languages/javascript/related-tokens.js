@@ -1,4 +1,4 @@
-const {closest, findAll, getText} = require('../../lib/node-helpers');
+const {closest, findAll, getText, nodeIsBig} = require('../../lib/node-helpers');
 
 const FUNCTION_TYPES = [
   'function',
@@ -55,7 +55,7 @@ function getVariableUsages(currentNode, buffer) {
 
   // Walk up the syntax tree, looking for declarations in each scope.
   let node = closest(currentNode, SCOPE_TYPES);
-  while (node) {
+  while (node && !nodeIsBig(node)) {
     let declaredVariable = null;
     let declaredVariableScope = null;
 
