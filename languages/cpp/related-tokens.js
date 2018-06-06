@@ -82,7 +82,7 @@ function getVariableUsages(node, buffer, rootNode) {
       const identifiers = findAll(scope, 'identifier');
       for (let i = 0, n = identifiers.length; i < n; i++) {
         const identifier = identifiers[i];
-        if (identifier.id !== variableDeclarationNode.id) {
+        if (identifier !== variableDeclarationNode) {
           if (getText(identifier, buffer) === variableName) {
             results.push({node: identifier, highlightClass: 'variable-usage'})
           }

@@ -1,4 +1,4 @@
-const {closest, findAll, getText, getNamedChild, findFirstNamed} = require('../../lib/node-helpers');
+const {closest, findAll, getText, getNamedChild, findFirstNamed, nodeIsBig} = require('../../lib/node-helpers');
 
 module.exports =
 function(node, buffer, rootNode) {
@@ -62,7 +62,7 @@ function getVariableUsages(node, buffer, rootNode) {
       const identifiers = findAll(scope, 'identifier');
       for (let i = 0, n = identifiers.length; i < n; i++) {
         const identifier = identifiers[i];
-        if (identifier.id !== variableDeclarationNode.id) {
+        if (identifier !== variableDeclarationNode) {
           if (getText(identifier, buffer) === variableName) {
             results.push({node: identifier, highlightClass: 'variable-usage'})
           }

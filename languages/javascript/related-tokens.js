@@ -78,6 +78,12 @@ function getVariableUsages(currentNode, buffer) {
             if (declaredVariable = parameter.namedChildren.find(child =>
               getText(child, buffer) === variableName
             )) break;
+          } else if (parameter.type === 'assignment_pattern') {
+            const lhs = parameter.firstChild;
+            if (getText(lhs, buffer) === variableName) {
+              declaredVariable = lhs;
+              break;
+            }
           }
         }
       } else {
@@ -126,7 +132,7 @@ function getVariableUsages(currentNode, buffer) {
       const identifiers = findAll(declaredVariableScope, ['identifier', 'shorthand_property_identifier']);
       for (let i = 0, n = identifiers.length; i < n; i++) {
         const identifier = identifiers[i];
-        if (identifier.id !== declaredVariable.id) {
+        if (identifier !== declaredVariable) {
           if (getText(identifier, buffer) === variableName) {
             results.push({node: identifier, highlightClass: 'variable-usage'})
           }
